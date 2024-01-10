@@ -6,6 +6,95 @@
 This article containes example of the most useful Matter chip-tool commands. It also goes threough some scenarios for working
 with Matter devices across different ecosystems like Apple Home.
 
+## Build Matter
+
+The following steps are documented here: https://github.com/project-chip/connectedhomeip/blob/master/docs/guides/BUILDING.md
+
+### Checking out the Matter code
+
+```
+$ git clone --recurse-submodules https://github.com/project-chip/connectedhomeip.git
+```
+
+### Updating Matter code
+
+```
+$ cd connectedhomeip/
+$ git pull
+$ git submodule update --init
+
+```
+
+### Installing prerequisites on Raspberry Pi 4
+
+#### Installing prerequisites on Linux
+
+```
+$ sudo apt-get install git gcc g++ pkg-config libssl-dev libdbus-1-dev \
+     libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev \
+     python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev
+```
+
+#### Install some Raspberry Pi specific dependencies:
+
+```
+$ sudo apt-get install pi-bluetooth avahi-utils
+```
+
+### Configuring wpa_supplicant for storing permanent changes
+
+By default, wpa_supplicant is not allowed to update (overwrite) configuration. If you want the Matter application to be able to store the configuration changes permanently, you need to make the following changes:
+
+1. Edit the dbus-fi.w1.wpa_supplicant1.service file to use configuration file instead by running the following command:
+
+```
+sudo nano /etc/systemd/system/dbus-fi.w1.wpa_supplicant1.service
+```
+
+2. Change the wpa_supplicant start parameters to::
+
+```
+ExecStart=/sbin/wpa_supplicant -u -s -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf
+```
+
+3. Add the wpa-supplicant configuration file by running the following command:
+
+```
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+```
+
+4. Add the following content to the wpa-supplicant file:
+
+```
+ctrl_interface=DIR=/run/wpa_supplicant
+update_config=1
+```
+
+5. Reboot your Raspberry Pi.
+
+### Prepare for building
+
+Before running any other build command, the scripts/activate.sh environment setup script should be sourced at the top level. This script takes care of downloading GN, ninja, and setting up a Python environment with libraries used to build and test.
+
+```
+source scripts/activate.sh
+```
+
+If this script says the environment is out of date, it can be updated by running:
+
+```
+source scripts/bootstrap.sh
+```
+
+The scripts/bootstrap.sh script re-creates the environment from scratch, which is expensive, so avoid running it unless the environment is out of date.
+
+### Building the CHIP Tool
+
+```
+mkdir out
+$ ./scripts/examples/gn_build_example.sh examples/chip-tool out
+```
+
 ## Pairing commands
 
 The pairing commands are used to commission device into a Matter Fabric. A device can join multiple fabrics in order
