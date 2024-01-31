@@ -126,6 +126,10 @@ Commission the device:
 $ ./chip-tool pairing ble-wifi <node_id> <SSID> <password> <setup_PIN_code> <discriminator> --bypass-attestation-verifier true
 ```
 
+```
+$ ./chip-tool pairing code-wifi <NodeId> <SSID> <password> <short manual pairing code> --bypass-attestation-verifier true
+```
+
 ### Multi-admin
 
 These commands are used to allow devices that are already part of a fabric to be paired to another fabric. The device can then be administrated from controllers in different ecosystems.
@@ -170,6 +174,24 @@ $ ./chip-tool pairing unpair <node_id>
 
 ```
 .chip-tool onoff off 5535 1
+```
+
+### Change color of a RGB light bulb
+
+```
+./chip-tool colorcontrol move-to-color 24939 24701 10 0 0 1 1
+```
+
+### Use wildcards
+
+The following wildcards are available:
+
+- For all attributes: 0xFFFFFFFF
+- For all clusters: 0xFFFFFFFF
+- For all endpoints: 0xFFFF
+
+```
+./chip-tool colorcontrol read-by-id 0xFFFFFFFF 1 1
 ```
 
 ### Read basic information from the Matter device
