@@ -108,7 +108,7 @@ to be admistrated from different ecosystems (Apple Home, Google Home, Amazon Ale
 
 ### Commission a Matter over WiFi Device using the chip-tool
 
-If you have a QR-code for the device it needs to be decoded to use it with the chip-tool.
+If you have a QR-code for the device it can be decoded to use it with the chip-tool.
 
 Use a tool to decode the scanned QR-code into a code like this:
 
@@ -128,6 +128,10 @@ $ ./chip-tool pairing ble-wifi <node_id> <SSID> <password> <setup_PIN_code> <dis
 
 ```
 $ ./chip-tool pairing code-wifi <NodeId> <SSID> <password> <short manual pairing code> --bypass-attestation-verifier true
+```
+
+```
+$ ./chip-tool pairing code <NodeId> <PairingCode>
 ```
 
 ### Multi-admin
