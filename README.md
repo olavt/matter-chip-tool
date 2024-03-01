@@ -146,6 +146,12 @@ Open the commissioning window on the paired Matter device by using the following
 $ ./chip-tool pairing open-commissioning-window <node_id> <option> <window_timeout> <iteration> <discriminator>
 ```
 
+Now you can use this pairing command to commission the device:
+
+```
+$ ./chip-tool pairing code <NodeId> <PairingCode>
+```
+
 In this command:
 
 - \<node_id\> is the ID of the node that should open commissioning window.
