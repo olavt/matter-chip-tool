@@ -77,6 +77,10 @@ update_config=1
 Before running any other build command, the scripts/activate.sh environment setup script should be sourced at the top level. This script takes care of downloading GN, ninja, and setting up a Python environment with libraries used to build and test.
 
 ```
+cd connectedhomeip
+```
+
+```
 source scripts/activate.sh
 ```
 
