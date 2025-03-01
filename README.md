@@ -226,3 +226,40 @@ You can also use the following command to list all available commands for the Ba
 $ ./chip-tool basicinformation
 ```
 
+## Generate Matter Onboarding Codes (QR Code and Manual Pairing Code)
+
+Note! The values used below are defined in "CHIPProjectConfig.h" found in the include folder of your project.
+
+```
+// Generate the QR Code
+chip-tool payload generate-qrcode \
+  --discriminator 3840 \
+  --setup-pin-code 20202021 \
+  --vendor-id 0xFFF1 \
+  --product-id 0x8004 \
+  --version 0 \
+  --commissioning-mode 0 \
+  --rendezvous 2
+```
+
+```
+// Generates the short manual pairing code (11-digit).
+chip-tool payload generate-manualcode \
+  --discriminator 3840 \
+  --setup-pin-code 20202021 \
+  --version 0 \
+  --commissioning-mode 0
+```
+
+```
+// To generate a long manual pairing code (21-digit) that includes both the vendor ID and product ID,
+// --commissioning-mode parameter must be set to either 1 or 2, indicating a non-standard commissioning flow.
+chip-tool payload generate-manualcode \
+  --discriminator 3840 \
+  --setup-pin-code 20202021 \
+  --vendor-id 0xFFF1 \
+  --product-id 0x8004 \
+  --version 0 \
+  --commissioning-mode 1
+```
+
