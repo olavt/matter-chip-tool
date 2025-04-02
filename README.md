@@ -226,6 +226,22 @@ You can also use the following command to list all available commands for the Ba
 ./chip-tool basicinformation
 ```
 
+## Subscribe to attribute updates
+
+Start the chip-tool in interactive mode:
+
+```
+./chip-tool interactive start
+```
+
+Then enter the following command:
+
+```
+administratorcommissioning subscribe window-status 5 10 1 0
+```
+
+1 is the Node Id and 0 is the Endpoint Id.
+
 ## Generate Matter Onboarding Codes (QR Code and Manual Pairing Code)
 
 Note! The values used below are defined in "CHIPProjectConfig.h" found in the include folder of your project.
