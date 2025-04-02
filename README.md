@@ -13,15 +13,15 @@ The following steps are documented here: https://github.com/project-chip/connect
 ### Checking out the Matter code
 
 ```
-$ git clone --recurse-submodules https://github.com/project-chip/connectedhomeip.git
+git clone --recurse-submodules https://github.com/project-chip/connectedhomeip.git
 ```
 
 ### Updating Matter code
 
 ```
-$ cd connectedhomeip/
-$ git pull
-$ git submodule update --init
+cd connectedhomeip/
+git pull
+git submodule update --init
 
 ```
 
@@ -30,7 +30,7 @@ $ git submodule update --init
 #### Installing prerequisites on Linux
 
 ```
-$ sudo apt-get install git gcc g++ pkg-config libssl-dev libdbus-1-dev \
+sudo apt-get install git gcc g++ pkg-config libssl-dev libdbus-1-dev \
      libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev \
      python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev
 ```
@@ -38,7 +38,7 @@ $ sudo apt-get install git gcc g++ pkg-config libssl-dev libdbus-1-dev \
 #### Install some Raspberry Pi specific dependencies:
 
 ```
-$ sudo apt-get install pi-bluetooth avahi-utils
+sudo apt-get install pi-bluetooth avahi-utils
 ```
 
 ### Configuring wpa_supplicant for storing permanent changes
@@ -96,7 +96,7 @@ The scripts/bootstrap.sh script re-creates the environment from scratch, which i
 
 ```
 mkdir out
-$ ./scripts/examples/gn_build_example.sh examples/chip-tool out
+ ./scripts/examples/gn_build_example.sh examples/chip-tool out
 ```
 
 ## Pairing commands
@@ -121,21 +121,21 @@ MT:6FCJ142C00KA0648G00
 Use the chip-tool to decode the QR-code information:
 
 ```
-$ ./chip-tool payload parse-setup-payload MT:6FCJ142C00KA0648G00
+./chip-tool payload parse-setup-payload MT:6FCJ142C00KA0648G00
 ```
 
 Commission the device:
 
 ```
-$ ./chip-tool pairing ble-wifi <node_id> <SSID> <password> <setup_PIN_code> <discriminator> --bypass-attestation-verifier true
+./chip-tool pairing ble-wifi <node_id> <SSID> <password> <setup_PIN_code> <discriminator> --bypass-attestation-verifier true
 ```
 
 ```
-$ ./chip-tool pairing code-wifi <NodeId> <SSID> <password> <short manual pairing code> --bypass-attestation-verifier true
+./chip-tool pairing code-wifi <NodeId> <SSID> <password> <short manual pairing code> --bypass-attestation-verifier true
 ```
 
 ```
-$ ./chip-tool pairing code <NodeId> <PairingCode>
+./chip-tool pairing code <NodeId> <PairingCode>
 ```
 
 ### Multi-admin
@@ -147,13 +147,13 @@ These commands are used to allow devices that are already part of a fabric to be
 Open the commissioning window on the paired Matter device by using the following command pattern:
 
 ```
-$ ./chip-tool pairing open-commissioning-window <node_id> <option> <window_timeout> <iteration> <discriminator>
+./chip-tool pairing open-commissioning-window <node_id> <option> <window_timeout> <iteration> <discriminator>
 ```
 
 Now you can use this pairing command to commission the device:
 
 ```
-$ ./chip-tool pairing code <NodeId> <PairingCode>
+./chip-tool pairing code <NodeId> <PairingCode>
 ```
 
 In this command:
@@ -173,13 +173,13 @@ Note: The \<iteration\> and \<discriminator\> values are ignored if the \<option
 Example command:
 
 ```
-$ ./chip-tool pairing open-commissioning-window 5535 1 600 1000 3840
+./chip-tool pairing open-commissioning-window 5535 1 600 1000 3840
 ```
 
 ### Forgetting the already-commissioned device
 
 ```
-$ ./chip-tool pairing unpair <node_id>
+./chip-tool pairing unpair <node_id>
 ```
 
 ## Device commands
@@ -215,15 +215,15 @@ Every Matter device supports the Basic Information cluster, which maintains the 
 Use the CHIP Tool's read command on the basicinformation cluster to read those values from the device:
 
 ```
-$ ./chip-tool basicinformation read vendor-name <node_id> <endpoint_id>
-$ ./chip-tool basicinformation read product-name <node_id> <endpoint_id>
-$ ./chip-tool basicinformation read software-version <node_id> <endpoint_id>
+./chip-tool basicinformation read vendor-name <node_id> <endpoint_id>
+./chip-tool basicinformation read product-name <node_id> <endpoint_id>
+./chip-tool basicinformation read software-version <node_id> <endpoint_id>
 ```
 
 You can also use the following command to list all available commands for the Basic Information cluster:
 
 ```
-$ ./chip-tool basicinformation
+./chip-tool basicinformation
 ```
 
 ## Generate Matter Onboarding Codes (QR Code and Manual Pairing Code)
@@ -232,7 +232,7 @@ Note! The values used below are defined in "CHIPProjectConfig.h" found in the in
 
 ```
 // Generate the QR Code
-chip-tool payload generate-qrcode \
+./chip-tool payload generate-qrcode \
   --discriminator 3840 \
   --setup-pin-code 20202021 \
   --vendor-id 0xFFF1 \
@@ -244,7 +244,7 @@ chip-tool payload generate-qrcode \
 
 ```
 // Generates the short manual pairing code (11-digit).
-chip-tool payload generate-manualcode \
+./chip-tool payload generate-manualcode \
   --discriminator 3840 \
   --setup-pin-code 20202021 \
   --version 0 \
@@ -254,7 +254,7 @@ chip-tool payload generate-manualcode \
 ```
 // To generate a long manual pairing code (21-digit) that includes both the vendor ID and product ID,
 // --commissioning-mode parameter must be set to either 1 or 2, indicating a non-standard commissioning flow.
-chip-tool payload generate-manualcode \
+./chip-tool payload generate-manualcode \
   --discriminator 3840 \
   --setup-pin-code 20202021 \
   --vendor-id 0xFFF1 \
