@@ -242,6 +242,18 @@ administratorcommissioning subscribe window-status 5 10 1 0
 
 1 is the Node Id and 0 is the Endpoint Id.
 
+## Clear the state of chip-tool
+
+If you want to clear all the state information used by the chip-tool, like the Fabric and the paired devices, you can delete the configuration files used. By default these are stored in the /tmp directory.
+
+```
+rm /tmp/chip_config.ini
+rm /tmp/chip_counters.ini
+rm /tmp/chip_factory.ini
+rm /tmp/chip_tool_config.ini
+rm /tmp/chip_tool_kvs
+```
+
 ## Generate Matter Onboarding Codes (QR Code and Manual Pairing Code)
 
 Note! The values used below are defined in "CHIPProjectConfig.h" found in the include folder of your project.
